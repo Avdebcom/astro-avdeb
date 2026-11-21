@@ -10,6 +10,8 @@
   which made prices unreadable on dark cards. New token `--avdeb-price-size`.
 - Fix: themes that underline links with an inset `box-shadow` (e.g. Drupal's Olivero) no longer draw lines
   under card titles, "View all" and buttons. The solid button's shadow is now `--avdeb-btn-shadow`.
+- Fix: themes with normalize.css (`article { display: block }`) no longer break the hero and featured
+  card layouts.
 
 ## 0.1.0 — 2026-11-21
 
