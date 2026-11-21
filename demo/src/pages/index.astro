@@ -1,0 +1,67 @@
+---
+import Base from "../layouts/Base.astro";
+import { AvdebProducts, AvdebProduct, AvdebButton } from "astro-avdeb/components";
+import { getAvdebProducts } from "astro-avdeb/data";
+
+const custom = await getAvdebProducts({ tag: "3d-prints", limit: 3 });
+---
+<Base title="astro-avdeb demo">
+	<h1>AVDEB products in Astro</h1>
+	<p class="lead">Every layout of <code>astro-avdeb</code>, rendered on the server with live products and a referral code on every link.</p>
+
+	<h2 class="demo">Grid</h2>
+	<AvdebProducts tag="stickers" limit={6} heading="Sticker drop" intro="Waterproof vinyl stickers, printed and shipped by AVDEB." />
+
+	<h2 class="demo">Carousel</h2>
+	<AvdebProducts url="https://avdeb.com/category/stickers/" layout="carousel" columns={4} limit={10} heading="Swipe the collection" />
+
+	<h2 class="demo">List — “shop the post”</h2>
+	<AvdebProducts q="keychain" layout="list" limit={3} cardStyle="outline" />
+
+	<h2 class="demo">Spotlight</h2>
+	<AvdebProducts tag="3d-prints" layout="spotlight" limit={4} columns={3} heading="3D printed picks" />
+
+	<h2 class="demo">Single product</h2>
+	<AvdebProduct handle="custom-qr-code-keychain" variant="hero" badge="Editor's pick" note="We hand these out at every open house — clients scan and land right on the listing." />
+	<AvdebProduct handle="https://avdeb.com/store/hot-cocoa-mug-keychains/" />
+	<AvdebProduct handle="hot-cocoa-mug-keychains" variant="card" />
+
+	<h2 class="demo">Buttons</h2>
+	<AvdebButton href="/category/stickers/" label="Shop all stickers" />
+	<AvdebButton href="/category/3d-prints/" label="Browse 3D prints" variant="outline" align="center" />
+	<AvdebButton href="/" label="Visit AVDEB" variant="link" align="end" />
+
+	<div class="dark-band">
+		<h2 class="demo">Dark theme, custom accent</h2>
+		<AvdebProducts tag="stickers" limit={4} columns={4} theme="dark" accentColor="#e0a84f" radius={24} cardStyle="outline" heading="After dark" />
+	</div>
+
+	<h2 class="demo">Restyled with CSS variables</h2>
+	<AvdebProducts tag="stickers" limit={3} class="brutal" cardStyle="outline" heading="Your brand, your rules" />
+
+	<h2 class="demo">Headless: your own markup</h2>
+	<ul class="mine">
+		{custom.cards.map((c) => (
+			<li><a href={c.href} rel={c.rel}>{c.image && <img src={c.image} alt="" width="64" height="64" />}<span>{c.title}</span><b>{c.price}</b></a></li>
+		))}
+	</ul>
+	{custom.disclosure && <small>{custom.disclosure}</small>}
+</Base>
+
+<style is:global>
+	.brutal {
+		--avdeb-accent: #ff4d00;
+		--avdeb-radius: 0px;
+		--avdeb-border: #111;
+		--avdeb-card-bg: #fffbe6;
+		--avdeb-gap: 1.5rem;
+		--avdeb-font-title: "Fraunces", serif;
+		--avdeb-title-size: 1.15rem;
+	}
+	.brutal .avdeb-card { border-width: 2px; box-shadow: 6px 6px 0 #111; }
+	.brutal .avdeb-card:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 #111; }
+	.mine { list-style: none; padding: 0; display: grid; gap: .5rem; }
+	.mine a { display: flex; gap: 1rem; align-items: center; color: inherit; text-decoration: none; padding: .5rem; border-radius: 12px; background: #f0f2ee; }
+	.mine img { border-radius: 8px; object-fit: cover; }
+	.mine span { flex: 1; }
+</style>

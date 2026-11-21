@@ -1,0 +1,59 @@
+---
+/** A call-to-action link to an AVDEB page, carrying the site's referral code. */
+import "virtual:astro-avdeb/styles.css";
+import { avdebLink } from "../catalog.ts";
+import type { Alignment, ButtonVariant } from "../constants.ts";
+import type { DisplaySettings } from "../display.ts";
+import { relFor } from "../view.ts";
+
+interface Props {
+    context: { ref: string; display: DisplaySettings } | null;
+    href: string;
+    label: string;
+    variant?: ButtonVariant;
+    align?: Alignment;
+    class?: string;
+    style?: string;
+}
+
+const {
+    context,
+    href,
+    label,
+    variant = "solid",
+    align = "start",
+    class: className,
+    style: extraStyle,
+} = Astro.props;
+const url = avdebLink(href, context?.ref ?? "");
+const accent = context?.display.accentColor;
+const newTab = context?.display.newTab ?? false;
+---
+
+<p
+    class:list={["avdeb-cta", `avdeb-cta--${align}`, className]}
+    style={[accent && `--_avdeb-accent:${accent}`, extraStyle].filter(Boolean).join(";") || undefined}
+>
+    {url ? (
+        <a
+            class:list={["avdeb-btn", `avdeb-btn--${variant}`]}
+            href={url}
+            rel={relFor(url)}
+            target={newTab ? "_blank" : undefined}
+        >
+            <span>{label}</span>
+            <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+                <path
+                    d="M3 8h9.5M8.5 4 12.5 8l-4 4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </a>
+    ) : (
+        <span>{label}</span>
+    )}
+</p>

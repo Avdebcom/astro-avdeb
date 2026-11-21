@@ -1,0 +1,36 @@
+---
+/**
+ * A referral call-to-action to any AVDEB page.
+ *
+ * @example <AvdebButton href="/creators/cleo/" label="Visit my shop" variant="outline" align="center" />
+ */
+import type { Alignment, ButtonVariant } from "../constants.ts";
+import { safeColor } from "../display.ts";
+import { loadRef, siteDisplay } from "../runtime.ts";
+import Button from "./Button.astro";
+
+interface Props {
+	/** avdeb.com URL or a path such as "/store/cat-sticker/". Other hosts render as plain text. */
+	href: string;
+	label?: string;
+	variant?: ButtonVariant;
+	align?: Alignment;
+	accentColor?: string;
+	newTab?: boolean;
+	class?: string;
+	style?: string;
+}
+
+const { href, label = "Shop on AVDEB", variant, align, accentColor, newTab, class: className, style } = Astro.props;
+const base = siteDisplay();
+const context = {
+	ref: await loadRef(),
+	display: {
+		...base,
+		accentColor: safeColor(accentColor) || base.accentColor,
+		newTab: typeof newTab === "boolean" ? newTab : base.newTab,
+	},
+};
+---
+
+<Button context={context} href={href} label={label} variant={variant} align={align} class={className} style={style} />

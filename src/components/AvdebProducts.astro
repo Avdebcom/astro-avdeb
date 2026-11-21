@@ -1,0 +1,80 @@
+---
+/**
+ * AVDEB products — a creator's shop, a category, a search or the newest products.
+ *
+ * @example <AvdebProducts creator="cleo" layout="carousel" limit={8} heading="From my shop" />
+ * @example <AvdebProducts url="https://avdeb.com/category/stickers/" columns={4} theme="dark" />
+ */
+import type { CardStyle, ImageRatio, Layout, Theme } from "../constants.ts";
+import { loadEmbed } from "../runtime.ts";
+import Embed from "./Embed.astro";
+
+interface Props {
+	/** Any AVDEB creator, category or product link — the source is detected automatically. */
+	url?: string;
+	/** Creator (designer) slug, e.g. "cleo". */
+	creator?: string;
+	/** Category slug, e.g. "stickers". */
+	tag?: string;
+	/** Product type, e.g. "Sticker". */
+	type?: string;
+	/** Search phrase. */
+	q?: string;
+	/** How many products (default 6; up to 12 without a secret key, 48 with one). */
+	limit?: number;
+	layout?: Layout;
+	columns?: number;
+	cardStyle?: CardStyle;
+	theme?: Theme;
+	/** Hex colour for prices, badges and buttons. */
+	accentColor?: string;
+	/** Corner radius in px (0–32). */
+	radius?: number;
+	imageRatio?: ImageRatio;
+	heading?: string;
+	intro?: string;
+	headingLevel?: 2 | 3 | 4 | 5;
+	/** Show a "View all" link for creator and category embeds (default true). */
+	viewAll?: boolean;
+	viewAllLabel?: string;
+	ctaLabel?: string;
+	hidePrice?: boolean;
+	hideCreator?: boolean;
+	hideBadges?: boolean;
+	newTab?: boolean;
+	class?: string;
+	/** Inline CSS, typically --avdeb-* custom properties. */
+	style?: string;
+}
+
+const p = Astro.props;
+const data = await loadEmbed(
+	{ url: p.url, creator: p.creator, tag: p.tag, type: p.type, q: p.q, limit: p.limit },
+	Astro.currentLocale,
+);
+---
+
+<Embed
+	data={data}
+	overrides={{
+		layout: p.layout,
+		columns: p.columns,
+		cardStyle: p.cardStyle,
+		theme: p.theme,
+		accentColor: p.accentColor,
+		radius: p.radius,
+		imageRatio: p.imageRatio,
+		ctaLabel: p.ctaLabel,
+		hidePrice: p.hidePrice,
+		hideCreator: p.hideCreator,
+		hideBadges: p.hideBadges,
+		newTab: p.newTab,
+	}}
+	heading={p.heading}
+	intro={p.intro}
+	headingLevel={p.headingLevel}
+	viewAll={p.viewAll ?? true}
+	viewAllLabel={p.viewAllLabel}
+	class={p.class}
+	style={p.style}
+/>

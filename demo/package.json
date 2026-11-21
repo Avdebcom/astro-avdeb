@@ -1,0 +1,14 @@
+{
+	"name": "astro-avdeb-demo",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview"
+	},
+	"dependencies": {
+		"astro": "^7.4.13",
+		"astro-avdeb": "file:astro-avdeb-0.1.0.tgz"
+	}
+}

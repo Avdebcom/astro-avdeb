@@ -1,0 +1,69 @@
+---
+/**
+ * One featured product.
+ *
+ * @example <AvdebProduct handle="cat-sticker" variant="hero" badge="Editor's pick" note="I use it daily." />
+ * @example <AvdebProduct handle="https://avdeb.com/store/cat-sticker/" />
+ */
+import { cleanSlug, parseAvdebLink } from "../catalog.ts";
+import { oneOf, PRODUCT_VARIANTS, type CardStyle, type ImageRatio, type ProductVariant, type Theme } from "../constants.ts";
+import { loadEmbed } from "../runtime.ts";
+import Embed from "./Embed.astro";
+
+interface Props {
+	/** Product handle, or a full https://avdeb.com/store/{handle}/ link. */
+	handle: string;
+	/** "horizontal" (default), "hero" or "card". */
+	variant?: ProductVariant;
+	/** Small label on the image, e.g. "Editor's pick". */
+	badge?: string;
+	/** Your own words about the product, shown with an accent rule. */
+	note?: string;
+	ctaLabel?: string;
+	cardStyle?: CardStyle;
+	theme?: Theme;
+	accentColor?: string;
+	radius?: number;
+	imageRatio?: ImageRatio;
+	hidePrice?: boolean;
+	hideCreator?: boolean;
+	hideBadges?: boolean;
+	newTab?: boolean;
+	headingLevel?: 2 | 3 | 4 | 5;
+	class?: string;
+	style?: string;
+}
+
+const p = Astro.props;
+const raw = String(p.handle ?? "").trim();
+const link = parseAvdebLink(raw);
+const handle = link ? (link.kind === "handle" ? link.value : "") : /[/.:]/.test(raw) ? "" : cleanSlug(raw);
+const variant = oneOf(p.variant, PRODUCT_VARIANTS) ?? "horizontal";
+const data = handle ? await loadEmbed({ handle }, Astro.currentLocale) : null;
+if (!handle) console.warn(`[astro-avdeb] <AvdebProduct handle="${raw}"> is not a product handle or /store/ link.`);
+---
+
+{
+	data && (
+		<Embed
+			data={data}
+			overrides={{
+				cardStyle: p.cardStyle,
+				theme: p.theme,
+				accentColor: p.accentColor,
+				radius: p.radius,
+				imageRatio: p.imageRatio,
+				ctaLabel: p.ctaLabel,
+				hidePrice: p.hidePrice,
+				hideCreator: p.hideCreator,
+				hideBadges: p.hideBadges,
+				newTab: p.newTab,
+			}}
+			viewAll={false}
+			headingLevel={p.headingLevel}
+			single={{ variant, badge: p.badge?.slice(0, 40), note: p.note?.slice(0, 600) }}
+			class={p.class}
+			style={p.style}
+		/>
+	)
+}

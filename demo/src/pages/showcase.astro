@@ -1,0 +1,9 @@
+---
+// Composed for the README screenshot.
+import Base from "../layouts/Base.astro";
+import { AvdebProducts } from "astro-avdeb/components";
+---
+<Base title="astro-avdeb showcase">
+	<AvdebProducts tag="3d-prints" layout="spotlight" limit={4} columns={3} heading="3D printed picks" intro="Designed by independent creators, printed and shipped by AVDEB." />
+</Base>
+<style is:global>main { padding-top: 1.5rem; padding-bottom: 1.5rem; }</style>
