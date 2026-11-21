@@ -8,6 +8,8 @@
   `--avdeb-card-bg`.
 - Fix: themes that style `article p` (colour, size) no longer reach prices, notes, intro and disclosure,
   which made prices unreadable on dark cards. New token `--avdeb-price-size`.
+- Fix: themes that underline links with an inset `box-shadow` (e.g. Drupal's Olivero) no longer draw lines
+  under card titles, "View all" and buttons. The solid button's shadow is now `--avdeb-btn-shadow`.
 
 ## 0.1.0 — 2026-11-21
 
