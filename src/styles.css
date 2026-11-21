@@ -394,7 +394,7 @@
 }
 
 :where(.avdeb--minimal) :where(.avdeb-card) {
-    background: transparent;
+    --avdeb-card-bg: transparent;
     --avdeb-pad: 0.75rem 0.15rem 0.25rem;
 }
 
@@ -556,7 +556,7 @@
     display: flex;
     align-items: baseline;
     gap: 0.45em;
-    font-size: 1.02rem;
+    font-size: var(--avdeb-price-size, 1.02rem);
     font-weight: 700;
     font-variant-numeric: tabular-nums;
 }
@@ -581,10 +581,10 @@
 
 /* ── List layout: compact "shop the post" rows (after the base card rules) ── */
 :where(.avdeb--list) :where(.avdeb-card) {
+    --avdeb-card-pad: 0.7rem;
     flex-direction: row;
     align-items: center;
     gap: 1rem;
-    padding: 0.7rem;
 }
 
 :where(.avdeb--list) :where(.avdeb-card__media) {
@@ -715,7 +715,7 @@
 }
 
 :where(.avdeb-card--hero) :where(.avdeb-card__price) {
-    font-size: 1.25rem;
+    --avdeb-price-size: 1.25rem;
 }
 
 :where(.avdeb--minimal) :where(.avdeb-card--featured) {
@@ -782,6 +782,18 @@
     list-style: none;
 }
 
+/* Cards are <article>s: themes that style `article { padding; max-width; background }` must not
+   reach them. Restyle with --avdeb-card-bg / --avdeb-card-pad. */
+.avdeb .avdeb__item > .avdeb-card {
+    inline-size: 100%;
+    max-inline-size: none;
+    min-block-size: 0;
+    margin: 0;
+    padding: var(--avdeb-card-pad, 0);
+    background: var(--avdeb-card-bg);
+    border-radius: var(--avdeb-radius);
+}
+
 .avdeb .avdeb__items .avdeb__item::marker {
     content: none;
 }
@@ -834,20 +846,43 @@
     font-weight: 600;
 }
 
+/* Text is in <p>s: `article p { color; font-size }` in a theme must not recolour it (e.g. dark text on
+   dark cards). Restyle with --avdeb-muted, --avdeb-price-size or the theme's text colour. */
 .avdeb .avdeb-card :is(.avdeb-card__by, .avdeb-card__price) {
     margin: 0;
 }
 
+.avdeb .avdeb-card .avdeb-card__price {
+    color: inherit;
+    font-size: var(--avdeb-price-size, 1.02rem);
+    line-height: 1.3;
+}
+
+.avdeb .avdeb-card .avdeb-card__by {
+    color: var(--avdeb-muted, inherit);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
 .avdeb .avdeb-card .avdeb-card__note {
     margin: 0.4rem 0 0;
+    color: inherit;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .avdeb .avdeb__header .avdeb__intro {
     margin: 0.4rem 0 0;
+    color: var(--avdeb-muted, inherit);
+    font-size: 1rem;
+    line-height: 1.55;
 }
 
 .avdeb > .avdeb__disclosure.avdeb__disclosure {
     margin: 1.1rem 0 0;
+    color: var(--avdeb-muted, inherit);
+    font-size: 0.78rem;
+    line-height: 1.4;
 }
 
 /* ── Motion & print ─────────────────────────────────────────────────────── */

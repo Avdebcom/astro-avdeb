@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1 — 2026-11-21
+
+- Fix: cards were padded, narrowed or recoloured on blogs whose theme styles the `article` element
+  (e.g. `article { padding: 1rem; max-width: 42rem }`): product cards are `<article>`s. A layout guard now
+  resets them; restyle card padding and background with the new `--avdeb-card-pad` token and
+  `--avdeb-card-bg`.
+- Fix: themes that style `article p` (colour, size) no longer reach prices, notes, intro and disclosure,
+  which made prices unreadable on dark cards. New token `--avdeb-price-size`.
+
 ## 0.1.0 — 2026-11-21
 
 - First release: `astro-avdeb` integration with `<AvdebProducts>`, `<AvdebProduct>` and `<AvdebButton>`

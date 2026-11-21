@@ -148,13 +148,13 @@ The defaults are designed to look native on most themes. When you want your own 
 |---|---|
 | `--avdeb-accent`, `--avdeb-accent-contrast`, `--avdeb-accent-text` | Accent, text on accent, accent used as text |
 | `--avdeb-surface` | Section background (light/dark/auto themes) |
-| `--avdeb-card-bg`, `--avdeb-border`, `--avdeb-border-soft` | Cards |
+| `--avdeb-card-bg`, `--avdeb-card-pad`, `--avdeb-border`, `--avdeb-border-soft` | Cards |
 | `--avdeb-media-bg` | Image placeholder background |
 | `--avdeb-muted` | Secondary text |
 | `--avdeb-badge-bg`, `--avdeb-badge-text` | Badges |
 | `--avdeb-shadow`, `--avdeb-shadow-hover` | Elevated cards |
 | `--avdeb-radius`, `--avdeb-ratio`, `--avdeb-cols`, `--avdeb-gap`, `--avdeb-pad` | Shape and layout |
-| `--avdeb-font-title`, `--avdeb-heading-size`, `--avdeb-title-size`, `--avdeb-title-leading` | Type |
+| `--avdeb-font-title`, `--avdeb-heading-size`, `--avdeb-title-size`, `--avdeb-title-leading`, `--avdeb-price-size` | Type |
 | `--avdeb-ease` | Motion curve |
 | `--avdeb-btn-bg`, `--avdeb-btn-color` | `<AvdebButton>` |
 

@@ -1,0 +1,20 @@
+---
+// Realistic blog post used in the package video (prose styles included on purpose).
+import Post from "../layouts/Post.astro";
+import { AvdebProducts, AvdebProduct, AvdebButton } from "astro-avdeb/components";
+---
+<Post title="Small gifts that actually get used" kicker="Holiday gift guide">
+	<p>Every December I end up buying the same thing: small, useful, a little bit fun. This year I picked everything from independent designers on AVDEB. It's printed on demand and ships fast.</p>
+
+	<AvdebProducts tag="stickers" layout="carousel" columns={3} limit={10} heading="Stickers for the countdown" intro="Waterproof vinyl, great for laptops, bottles and party favours." />
+
+	<h2>My favourite this year</h2>
+	<p>If you only get one thing from this list, make it this one.</p>
+	<AvdebProduct handle="custom-qr-code-keychain" variant="hero" badge="Editor's pick" note="I hand these out at every open house. Clients scan the keychain and land right on the listing." />
+
+	<h2>Shop the post</h2>
+	<p>The keychains from my desk, in one place:</p>
+	<AvdebProducts q="keychain" layout="list" limit={3} />
+
+	<AvdebButton href="/category/3d-prints/" label="Browse all 3D prints" align="center" />
+</Post>

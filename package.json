@@ -1,6 +1,6 @@
 {
 	"name": "astro-avdeb",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Astro components for AVDEB products — grid, carousel, list and spotlight embeds with your affiliate referral link on every product",
 	"type": "module",
 	"main": "./src/index.ts",

@@ -1,7 +1,7 @@
 /** Shared identifiers and limits. Pure module: no Astro imports. */
 
 export const PACKAGE_NAME = "astro-avdeb";
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 
 export const API_HOST = "api.avdeb.com";
 export const API_BASE = `https://${API_HOST}/v1/catalog`;

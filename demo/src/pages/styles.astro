@@ -1,0 +1,24 @@
+---
+// Styling showcase used in the package video.
+import Post from "../layouts/Post.astro";
+import { AvdebProducts } from "astro-avdeb/components";
+---
+<Post title="Make it match your site" kicker="Styling">
+	<p>Same component, three looks.</p>
+	<h2>Props: dark theme and your accent</h2>
+	<AvdebProducts tag="3d-prints" limit={3} theme="dark" accentColor="#e0a84f" radius={24} cardStyle="outline" />
+	<h2>CSS variables</h2>
+	<AvdebProducts tag="stickers" limit={3} class="brutal" cardStyle="outline" />
+	<h2>Spotlight layout</h2>
+	<AvdebProducts tag="3d-prints" layout="spotlight" limit={4} />
+</Post>
+<style is:global>
+	.brutal {
+		--avdeb-accent: #ff4d00;
+		--avdeb-radius: 0px;
+		--avdeb-border: #111;
+		--avdeb-card-bg: #fffbe6;
+		--avdeb-font-title: "Fraunces", serif;
+	}
+	.brutal .avdeb-card { border-width: 2px; box-shadow: 6px 6px 0 #111; }
+</style>
